@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "../pages/home/Home";
 import About from "../pages/about/About";
 import Login from "../pages/login/Login";
@@ -6,17 +6,17 @@ import Layout, { LayoutType2 } from "./layout/Layout";
 
 function Routers() {
   return (
-    <BrowserRouter>
+    <Router>
     <Routes>
         <Route element={<Layout/>}>
-            <Route path={process.env.PUBLIC_URL + '/'} element={<Home/>}/>
-            <Route path={process.env.PUBLIC_URL +'/about'} element={<About/>}/>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/about' element={<About/>}/>
         </Route>
         <Route element={<LayoutType2/>}>
-            <Route path={process.env.PUBLIC_URL + '/login'} element={<Login/>}/>
+            <Route path='/login' element={<Login/>}/>
         </Route>
     </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
