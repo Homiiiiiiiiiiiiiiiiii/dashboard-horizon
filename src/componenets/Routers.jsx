@@ -9,11 +9,11 @@ function Routers() {
     <BrowserRouter>
     <Routes>
         <Route element={<Layout/>}>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/about' element={<About/>}/>
+            <Route path={process.env.PUBLIC_URL + '/'} element={<Home/>}/>
+            <Route path={process.env.PUBLIC_URL +'/about'} element={<About/>}/>
         </Route>
         <Route element={<LayoutType2/>}>
-            <Route path='/login' element={<Login/>}/>
+            <Route path={process.env.PUBLIC_URL + '/login'} element={<Login/>}/>
         </Route>
     </Routes>
     </BrowserRouter>
