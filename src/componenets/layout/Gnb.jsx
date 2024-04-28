@@ -1,6 +1,6 @@
 import { Link} from '@chakra-ui/react'
 import { useLocation,Link as ReactRouterLink } from "react-router-dom"
-import { AddIcon, LinkIcon, RepeatIcon } from '@chakra-ui/icons'
+import { AddIcon, EditIcon, LinkIcon, RepeatIcon } from '@chakra-ui/icons'
 
 function Gnb(){
 
@@ -8,6 +8,7 @@ function Gnb(){
         { name: 'Home', path: '/', icon: <RepeatIcon /> },
         { name: 'About', path: '/about', icon: <AddIcon /> },
         { name: 'Login', path: '/login', icon: <LinkIcon /> },
+        { name: 'Todo', path: '/todo', icon: <EditIcon /> },
     ]
 
     const location = useLocation();
