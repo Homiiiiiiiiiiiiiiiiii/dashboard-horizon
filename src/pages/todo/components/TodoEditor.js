@@ -1,30 +1,31 @@
 import { Box, Button, Heading, Input } from '@chakra-ui/react'
-import React, { useRef, useState } from 'react'
-import { useTodoDispatch, useTodoState } from '../../../context/TodoContext'
+import React, { useState } from 'react'
+// import { useTodoDispatch, useTodoState } from '../../../context/TodoContext'
+import { useDispatch } from 'react-redux'
+import { addTodo } from '../../store/slices/todoSlice'
 
 const TodoEditor = () => {
 
     const [task, setTask] = useState('')
-    const state = useTodoState()
-    const dispatch = useTodoDispatch()
+    // const state = useTodoState()
+    // const dispatch = useTodoDispatch()
 
-    const addTodo = (task) => {
-        const newTodo = {
-          id : state.length + 1,
-          isDone : false,
-          task,
-          createdDate : new Date().getTime()
-        }
-        dispatch({type: 'ADD', payload: newTodo}) //새로운 todo를 맨 앞쪽에 추가
-      }
-
+    const dispatch = useDispatch()
+   
     function onChange(e){
         setTask(e.target.value)
     }
 
     function onSubmit(e){
         if (!task) return
-        addTodo(task)
+        dispatch(
+            addTodo({
+                id: Date.now(),
+                isDone: false,
+                task,
+                createdDate: new Date().getTime(),
+            })
+        )
         setTask('')
     }
 

@@ -1,18 +1,25 @@
 import { Box, Heading, Input } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import TodoItem from './TodoItem'
-import { useTodoState } from '../../../context/TodoContext'
+// import { useTodoState } from '../../../context/TodoContext'
+import { useSelector } from 'react-redux'
 
 const TodoList = () => {
     const [search, setSearch] = useState('')
-    const todo = useTodoState()
+    const todo = useSelector((state) => state.todo.todos)
+    // const todo = useTodoState()
 
     function onChangeSearch(e) {
         setSearch(e.target.value)
     }
 
     const filteredTodo = () => {
-        return todo.filter((item) => item.task.toLowerCase().includes(search.toLowerCase()))
+        // todo 상태가 배열인지 확인하고 배열 메서드를 사용하기
+        if (Array.isArray(todo)) {
+            return todo.filter((item) => item.task.toLowerCase().includes(search.toLowerCase()))
+        } else {
+            return []
+        }
     }
 
 

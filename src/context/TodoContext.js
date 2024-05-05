@@ -22,16 +22,16 @@ const initialState = [
 ]
 
 const reducer = (state, action) => {
-switch (action.type) {
-    case 'ADD':
-    return [action.payload, ...state]
-    case 'update':
-    return state.map((item) => (item.id === action.payload ? {...item, isDone: !item.isDone} : item))
-    case 'delete':
-    return state.filter((item) => item.id !== action.payload)
-    default:
-    return state
-}
+    switch (action.type) {
+        case 'add':
+            return [action.payload, ...state]
+        case 'update':
+            return state.map((item) => (item.id === action.payload ? { ...item, isDone: !item.isDone } : item))
+        case 'delete':
+            return state.filter((item) => item.id !== action.payload)
+        default:
+            return state
+    }
 }
 
 //context생성
