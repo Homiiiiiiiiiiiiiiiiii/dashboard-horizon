@@ -1,10 +1,12 @@
 import { Box, Heading, Input } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import TodoItem from './TodoItem'
+import { useTodoState } from '../../../context/TodoContext'
 
-const TodoList = ({todo, updateTodo, deleteTodo}) => {
+const TodoList = () => {
     const [search, setSearch] = useState('')
-    
+    const todo = useTodoState()
+
     function onChangeSearch(e) {
         setSearch(e.target.value)
     }
@@ -27,7 +29,7 @@ const TodoList = ({todo, updateTodo, deleteTodo}) => {
             />
             <ul>
                 {filteredTodo().map((item) => (
-                    <TodoItem key={item.id} {...item} updateTodo={updateTodo} deleteTodo={deleteTodo}/> //전개 연산자 사용으로 데이터 한번에 보냄
+                    <TodoItem key={item.id} {...item} /> //전개 연산자 사용으로 데이터 한번에 보냄
                 ))}
             </ul>
         </Box>

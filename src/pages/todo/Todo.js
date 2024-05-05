@@ -2,40 +2,7 @@ import React, { useReducer, useState } from 'react'
 import TodoHd from './components/TodoHd';
 import TodoEditor from './components/TodoEditor';
 import TodoList from './components/TodoList';
-
-const mockTodo = [
-  {
-      id: 1,
-      isDone: false,
-      task: '고양이 밥주기',
-      createdDate: new Date().getTime(), // 현재 시간
-  },
-  {
-      id: 2,
-      isDone: false,
-      task: '감자 캐기',
-      createdDate: new Date().getTime(),
-  },
-  {
-      id: 3,
-      isDone: false,
-      task: '고양이 놀아주기',
-      createdDate: new Date().getTime(),
-  },
-]
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD':
-      return [action.payload, ...state]
-    case 'update':
-      return state.map((item) => (item.id === action.payload ? {...item, isDone: !item.isDone} : item))
-    case 'delete':
-      return state.filter((item) => item.id !== action.payload)
-    default:
-      return state
-  }
-}
+import { TodoProvider } from '../../context/TodoContext';
 
 const Todo = () => {
   // const [todo, setTodo] = useState(mockTodo)
@@ -70,34 +37,13 @@ const Todo = () => {
   // const deleteTodo = (id) => {
   //   setTodo(todo.filter((item) => item.id !== id))
   // }
-
-  const [state, dispatch] = useReducer(reducer, mockTodo)
-
-  const addTodo = (task) => {
-    const newTodo = {
-      id : state.length + 1,
-      isDone : false,
-      task,
-      createdDate : new Date().getTime()
-    }
-    dispatch({type: 'ADD', payload: newTodo}) //새로운 todo를 맨 앞쪽에 추가
-  }
-
-  const updateTodo = (id) => {
-    dispatch({type:'update', payload: id})
-  }
-
-  const deleteTodo = (id) => {
-    dispatch({type:'delete', payload: id})
-  }
-
-
+  
   return (
-    <div>
+    <TodoProvider>
       <TodoHd />
-      <TodoEditor addTodo={addTodo}/>
-      <TodoList todo={state} updateTodo={updateTodo} deleteTodo={deleteTodo}/>
-    </div>
+      <TodoEditor />
+      <TodoList />
+    </TodoProvider>
 
   )
 }

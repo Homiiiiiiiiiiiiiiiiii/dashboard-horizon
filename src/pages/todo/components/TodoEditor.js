@@ -1,10 +1,22 @@
 import { Box, Button, Heading, Input } from '@chakra-ui/react'
 import React, { useRef, useState } from 'react'
+import { useTodoDispatch, useTodoState } from '../../../context/TodoContext'
 
-const TodoEditor = ({addTodo}) => {
+const TodoEditor = () => {
 
     const [task, setTask] = useState('')
-    const inputRef = useRef()
+    const state = useTodoState()
+    const dispatch = useTodoDispatch()
+
+    const addTodo = (task) => {
+        const newTodo = {
+          id : state.length + 1,
+          isDone : false,
+          task,
+          createdDate : new Date().getTime()
+        }
+        dispatch({type: 'ADD', payload: newTodo}) //새로운 todo를 맨 앞쪽에 추가
+      }
 
     function onChange(e){
         setTask(e.target.value)
